@@ -1,0 +1,139 @@
+:root{
+  --emas:#b98c4a; --emas-tua:#8f6528; --emas-muda:#dcc08f;
+  --krem:#f7ecd7; --krem2:#efe0c4; --tinta:#5a3d14; --redup:#7d6540;
+  --tulis:"Pinyon Script","Great Vibes","Brush Script MT",cursive;
+  --judul:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --arab:"Amiri","Traditional Arabic",serif;
+  --uk:clamp(108px,30vw,150px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--krem);color:var(--tinta);font-family:var(--judul);font-size:19px;line-height:1.55;text-align:center;overflow-x:hidden}
+body.terkunci{overflow:hidden}
+body.terkunci main{display:none}
+h1,h2,h3,p,figure,blockquote{margin:0}
+img{display:block;max-width:100%}
+
+/* Halaman dan bingkai */
+.halaman{position:relative;min-height:100vh;min-height:100svh;padding:118px 26px;display:flex;align-items:center;justify-content:center;background:var(--krem)}
+.halaman::before{content:"";position:absolute;inset:12px;border:1px solid var(--emas-muda);pointer-events:none}
+.isi{position:relative;z-index:1;width:100%;max-width:460px}
+.isi>*+*{margin-top:14px}
+
+/* Ornamen batik di sudut */
+.hias{position:absolute;inset:0;pointer-events:none;background-repeat:no-repeat;background-size:var(--uk) auto}
+.hias.a{background-image:url(dekorasi/kiri-atas-A.webp),url(dekorasi/kanan-bawah-A.webp);background-position:left 12px top 12px,right 12px bottom 12px}
+.hias.b{background-image:url(dekorasi/kanan-atas-A.webp),url(dekorasi/kiri-bawah-A.webp);background-position:right 12px top 12px,left 12px bottom 12px}
+.hias.penuh{--uk:clamp(120px,36vw,180px);background-image:url(dekorasi/kiri-atas-A.webp),url(dekorasi/kanan-atas-A.webp),url(dekorasi/kiri-bawah-A.webp),url(dekorasi/kanan-bawah-A.webp);background-position:left 12px top 12px,right 12px top 12px,left 12px bottom 12px,right 12px bottom 12px}
+
+/* Sampul */
+.sampul{position:fixed;inset:0;z-index:10;overflow-y:auto;transition:transform .9s ease,opacity .9s ease,visibility 0s linear .9s}
+.sampul.terbuka{transform:translateY(-100%);opacity:0;visibility:hidden;pointer-events:none}
+
+/* Tulisan */
+.kecil{font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:var(--emas-tua)}
+.kecil2{font-size:15px;color:var(--emas-tua);letter-spacing:.06em}
+.nama{font-family:var(--tulis);font-weight:400;font-size:clamp(38px,11.5vw,60px);line-height:1.25;color:var(--emas-tua);white-space:nowrap}
+.nama span{font-size:.8em;color:var(--emas)}
+.nama2{font-family:var(--tulis);font-weight:400;font-size:clamp(30px,9vw,40px);line-height:1.25;color:var(--emas-tua)}
+.dan{font-family:var(--tulis);font-size:34px;color:var(--emas);line-height:1}
+.judul{font-family:var(--tulis);font-weight:400;font-size:clamp(36px,10vw,46px);line-height:1.2;color:var(--emas-tua)}
+.tanggal{font-size:24px;font-weight:500;letter-spacing:.04em}
+.redup{color:var(--redup)}
+.arab{font-family:var(--arab);font-size:30px;line-height:1.9;color:var(--emas-tua)}
+.arab2{font-style:italic;color:var(--emas-tua)}
+h3{font-weight:600;font-size:24px;line-height:1.25;color:var(--emas-tua)}
+.ayat{padding:14px 10px}
+a{color:var(--emas-tua)}
+
+/* Pemisah */
+.dv{position:relative;height:10px;width:min(180px,60%);margin-left:auto;margin-right:auto;background:linear-gradient(var(--emas),var(--emas)) center/100% 1px no-repeat}
+.dv::after{content:"";position:absolute;left:50%;top:1px;width:8px;height:8px;margin-left:-4px;background:var(--krem);border:1px solid var(--emas);transform:rotate(45deg)}
+
+/* Nama tamu */
+.tamu{padding-top:6px}
+.tamu p:first-child{font-size:16px;color:var(--redup)}
+.nama-tamu{font-family:var(--tulis);font-size:32px;line-height:1.3;color:var(--emas-tua)}
+
+/* Tombol */
+.tombol{display:inline-block;padding:12px 28px;border:1px solid var(--emas);border-radius:999px;background:var(--emas-tua);color:var(--krem);font:500 18px var(--judul);text-decoration:none;cursor:pointer}
+.tombol:hover{background:#74511f}
+.tombol:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--emas);outline-offset:2px}
+.tombol.garis{background:transparent;color:var(--emas-tua)}
+.tombol.garis:hover{background:var(--krem2)}
+.tombol.kecil{padding:6px 18px;font-size:16px;letter-spacing:0;text-transform:none;margin-top:6px}
+.kecil2 a{font-size:16px}
+
+/* Foto oval */
+.oval{width:min(210px,56vw);aspect-ratio:4/5;margin:10px auto;border-radius:50%;border:4px double var(--emas);overflow:hidden;background:var(--krem2);position:relative}
+.oval img{width:100%;height:100%;object-fit:cover}
+.oval.kosong img{display:none}
+.oval.kosong::after{content:"Foto menyusul";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--tulis);font-size:26px;color:var(--emas-tua)}
+
+/* Hitung mundur */
+.hitung{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0}
+.hitung div{padding:10px 2px;border:1px solid var(--emas);border-radius:8px;background:rgba(255,255,255,.35)}
+.hitung b{display:block;font-size:34px;font-weight:500;line-height:1.1;color:var(--emas-tua)}
+.hitung span{font-size:15px;color:var(--redup)}
+
+/* Kartu */
+.kartu{padding:16px 18px;border:1px solid var(--emas-muda);border-radius:10px;background:rgba(255,255,255,.35)}
+.rek{font-size:26px;font-weight:600;letter-spacing:.06em;color:var(--tinta)}
+
+/* Formulir */
+form{display:grid;gap:14px;text-align:left}
+label,legend{display:block;font-size:16px;color:var(--emas-tua)}
+input[type=text],select,textarea{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--emas);border-radius:8px;background:rgba(255,255,255,.6);color:var(--tinta);font:18px var(--judul)}
+fieldset{border:0;padding:0;margin:0;display:flex;gap:10px;flex-wrap:wrap}
+legend{width:100%;margin-bottom:4px}
+.pil input{position:absolute;opacity:0}
+.pil span{display:inline-block;padding:8px 18px;border:1px solid var(--emas);border-radius:999px;cursor:pointer;color:var(--tinta)}
+.pil input:checked+span{background:var(--emas-tua);color:var(--krem)}
+.pil input:focus-visible+span{outline:3px solid var(--emas);outline-offset:2px}
+form .tombol{justify-self:center}
+.pesan{text-align:center;min-height:1.4em;color:var(--redup);font-size:16px}
+
+/* Animasi */
+.kata{opacity:0;animation:kata .9s ease forwards;animation-delay:calc(var(--urut) * .3s)}
+@keyframes kata{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
+.js .reveal.tampak{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .kata,.js .reveal{opacity:1;animation:none;transform:none;transition:none}
+  .sampul{transition:none}
+}
+
+/* ===== FONT BARU: elegan dan mudah dibaca ===== */
+:root{
+  --tulis:"Playfair Display",Georgia,"Times New Roman",serif;   /* nama dan judul */
+  --judul:"Lora",Georgia,"Times New Roman",serif;               /* isi teks */
+}
+body{font-size:17px;line-height:1.65}
+.nama{font-style:italic;font-weight:500;font-size:clamp(28px,9vw,50px);line-height:1.3}
+.nama2{font-style:italic;font-weight:500;font-size:clamp(24px,7vw,32px);line-height:1.3}
+.nama-tamu{font-style:italic;font-weight:500;font-size:24px}
+.dan{font-style:italic;font-size:28px}
+.judul{font-weight:500;font-size:clamp(28px,8vw,36px);line-height:1.25}
+h3{font-size:20px}
+.tanggal{font-size:21px;font-weight:500}
+.arab2{font-size:16px}
+.oval.kosong::after{font-size:20px;font-style:italic}
+.hitung b{font-size:30px}
+
+/* ===== DEKORASI LATAR: corak kawung dan pinggiran tumpal ===== */
+:root{
+  --kawung:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64' fill='none' stroke='%23b98c4a' stroke-opacity='.22'%3E%3Cellipse cx='32' cy='16' rx='8' ry='16'/%3E%3Cellipse cx='32' cy='48' rx='8' ry='16'/%3E%3Cellipse cx='16' cy='32' rx='16' ry='8'/%3E%3Cellipse cx='48' cy='32' rx='16' ry='8'/%3E%3Ccircle cx='32' cy='32' r='2.5' fill='%23b98c4a' fill-opacity='.3' stroke='none'/%3E%3C/svg%3E");
+  --tumpal-atas:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16' viewBox='0 0 28 16'%3E%3Cpath d='M0 0H28L14 14Z' fill='%23b98c4a' fill-opacity='.4'/%3E%3Cpath d='M6 0H22L14 8Z' fill='%23f7ecd7'/%3E%3C/svg%3E");
+  --tumpal-bawah:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16' viewBox='0 0 28 16'%3E%3Cpath d='M0 16H28L14 2Z' fill='%23b98c4a' fill-opacity='.4'/%3E%3Cpath d='M6 16H22L14 8Z' fill='%23f7ecd7'/%3E%3C/svg%3E");
+}
+.halaman{
+  background-color:var(--krem);
+  background-image:radial-gradient(ellipse 75% 52% at 50% 50%,var(--krem) 30%,rgba(247,236,215,0) 100%),var(--kawung);
+  background-size:auto,64px 64px;
+}
+.halaman::before{
+  background:var(--tumpal-atas) repeat-x left top/28px 16px,var(--tumpal-bawah) repeat-x left bottom/28px 16px;
+}
+
+/* Halaman pertama baru beranimasi setelah sampul selesai bergeser */
+main .kata{animation-delay:calc(.7s + var(--urut) * .3s)}

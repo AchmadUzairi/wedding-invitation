@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Undangan Pernikahan Uzairi &amp; Shalia</title>
+  <meta name="description" content="Undangan pernikahan Achmad Uzairi Rachman dan Shalia Samanta Inaray, Minggu 10 Januari 2027, Masjid Agung Gresik.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="terkunci">
+
+<!-- SAMPUL (tanpa tanggal) -->
+<header class="halaman sampul">
+  <div class="hias penuh" aria-hidden="true"></div>
+  <div class="isi">
+    <p class="kecil kata" style="--urut:1">Undangan Pernikahan</p>
+    <h1 class="nama kata" style="--urut:2">Uzairi <span>&amp;</span> Shalia</h1>
+    <div class="dv kata" style="--urut:3"></div>
+    <div class="tamu kata" style="--urut:4">
+      <p>Kepada Yth.</p>
+      <p class="nama-tamu" id="nama-tamu">Bapak/Ibu/Saudara/i</p>
+    </div>
+    <button class="tombol kata" style="--urut:5" id="tombol-buka" type="button">Buka undangan</button>
+  </div>
+</header>
+
+<main id="isi">
+
+  <!-- 1. PEMBUKA: nama dan tanggal -->
+  <section class="halaman">
+    <div class="hias a" aria-hidden="true"></div>
+    <div class="isi">
+      <p class="kecil kata" style="--urut:1">Undangan Pernikahan</p>
+      <h2 class="nama kata" style="--urut:2">Uzairi <span>&amp;</span> Shalia</h2>
+      <div class="dv kata" style="--urut:3"></div>
+      <p class="tanggal kata" style="--urut:4">Minggu, 10 Januari 2027</p>
+    </div>
+  </section>
+
+  <!-- 2. AR-RAHMAN -->
+  <section class="halaman">
+    <div class="hias b" aria-hidden="true"></div>
+    <div class="isi">
+      <p class="arab" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <div class="dv"></div>
+      <h2 class="judul">QS. Ar-Rahman</h2>
+      <!-- GANTI blok di bawah dengan ayat Ar-Rahman yang dipilih (teks Arab dan terjemahannya) -->
+      <blockquote class="ayat">
+        <p class="arab" lang="ar" dir="rtl">…</p>
+        <p class="redup"><em>(Ayat dan terjemahan Ar-Rahman akan diisi)</em></p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 3. FOTO DAN NAMA -->
+  <section class="halaman">
+    <div class="hias a" aria-hidden="true"></div>
+    <div class="isi">
+      <p class="kecil">Mempelai</p>
+      <figure class="oval"><img src="foto/pasangan.jpg" alt="Foto Uzairi dan Shalia" width="600" height="750" loading="lazy"></figure>
+      <h2 class="nama2">Achmad Uzairi Rachman</h2>
+      <p class="dan">&amp;</p>
+      <h2 class="nama2">Shalia Samantha Inaray</h2>
+    </div>
+  </section>
+
+  <!-- 4. HITUNG MUNDUR + KALENDER -->
+  <section class="halaman">
+    <div class="hias b" aria-hidden="true"></div>
+    <div class="isi">
+      <h2 class="judul">Menuju hari bahagia</h2>
+      <div class="hitung">
+        <div><b id="hari">0</b><span>hari</span></div>
+        <div><b id="jam">0</b><span>jam</span></div>
+        <div><b id="menit">0</b><span>menit</span></div>
+        <div><b id="detik">0</b><span>detik</span></div>
+      </div>
+      <button class="tombol" id="tombol-kalender" type="button">Tambahkan ke kalender</button>
+      <p class="redup kecil2"><a id="tautan-google" href="#" target="_blank" rel="noopener">atau buka di Google Calendar</a></p>
+    </div>
+  </section>
+
+  <!-- 5. RANGKAIAN ACARA -->
+  <section class="halaman">
+    <div class="hias a" aria-hidden="true"></div>
+    <div class="isi">
+      <h2 class="judul">Rangkaian acara</h2>
+      <div class="kartu">
+        <h3>Akad Nikah</h3>
+        <p>Minggu, 10 Januari 2027</p>
+        <p class="redup">Pukul: akan diinformasikan</p>
+        <p>Masjid Agung Gresik</p>
+        <p class="redup">Gresik, Jawa Timur</p>
+      </div>
+      <div class="kartu">
+        <h3>Resepsi</h3>
+        <p class="redup">Tanggal: akan diinformasikan</p>
+        <p class="redup">Tempat: akan diinformasikan</p>
+      </div>
+      <a class="tombol garis" href="https://www.google.com/maps/search/?api=1&amp;query=Masjid+Agung+Gresik" target="_blank" rel="noopener">Buka di Google Maps</a>
+    </div>
+  </section>
+
+  <!-- 6. KELUARGA KAMI -->
+  <section class="halaman">
+    <div class="hias b" aria-hidden="true"></div>
+    <div class="isi">
+      <h2 class="judul">Keluarga kami</h2>
+      <div class="kartu">
+        <p class="kecil2">Mempelai pria</p>
+        <h3>Achmad Uzairi Rachman</h3>
+        <p class="redup">Putra dari</p>
+        <p>Bapak ………… &amp; Ibu …………</p>
+      </div>
+      <div class="kartu">
+        <p class="kecil2">Mempelai wanita</p>
+        <h3>Shalia Samanta Inaray</h3>
+        <p class="redup">Putri dari</p>
+        <p>Bapak ………… &amp; Ibu …………</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. TANDA KASIH -->
+  <section class="halaman">
+    <div class="hias a" aria-hidden="true"></div>
+    <div class="isi">
+      <h2 class="judul">Tanda kasih</h2>
+      <p class="redup">Doa restu Anda adalah hadiah terindah bagi kami. Bila ingin berbagi tanda kasih, dapat melalui:</p>
+      <div class="kartu">
+        <p class="kecil2">Transfer</p>
+        <h3>Bank ………</h3>
+        <p class="rek" id="rek1">0000 0000 0000</p>
+        <p class="redup">a.n. …………</p>
+        <button class="tombol kecil" type="button" data-salin="#rek1">Salin nomor</button>
+      </div>
+      <div class="kartu">
+        <p class="kecil2">Kirim hadiah</p>
+        <p id="alamat1">Jl. …………, Gresik (alamat akan diisi)</p>
+        <button class="tombol kecil" type="button" data-salin="#alamat1">Salin alamat</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. RSVP DAN UCAPAN -->
+  <section class="halaman">
+    <div class="hias b" aria-hidden="true"></div>
+    <div class="isi">
+      <h2 class="judul">RSVP dan ucapan</h2>
+      <form id="rsvp" novalidate>
+        <label>Nama<input id="f-nama" type="text" autocomplete="name" required></label>
+        <fieldset>
+          <legend>Kehadiran</legend>
+          <label class="pil"><input type="radio" name="hadir" value="hadir" checked><span>Hadir</span></label>
+          <label class="pil"><input type="radio" name="hadir" value="tidak"><span>Tidak hadir</span></label>
+        </fieldset>
+        <label>Jumlah tamu
+          <select id="f-jumlah"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+        </label>
+        <label>Ucapan dan doa<textarea id="f-ucapan" rows="3"></textarea></label>
+        <button class="tombol" type="submit">Kirim lewat WhatsApp</button>
+        <p class="pesan" id="pesan" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 9. TERIMA KASIH -->
+  <section class="halaman">
+    <div class="hias penuh" aria-hidden="true"></div>
+    <div class="isi">
+      <h2 class="nama">Terima kasih</h2>
+      <div class="dv"></div>
+      <p>Atas kehadiran, doa, dan restu Bapak/Ibu/Saudara/i, kami ucapkan terima kasih yang sebesar-besarnya.</p>
+      <p class="arab2">Wassalamu’alaikum Warahmatullahi Wabarakatuh</p>
+      <p class="nama">Uzairi <span>&amp;</span> Shalia</p>
+    </div>
+  </section>
+
+</main>
+<script src="script.js"></script>
+</body>
+</html>
