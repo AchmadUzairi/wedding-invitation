@@ -1,89 +1,159 @@
 :root{
-  --emas:#b98c4a; --emas-tua:#8f6528; --emas-muda:#dcc08f;
-  --krem:#f7ecd7; --krem2:#efe0c4; --tinta:#5a3d14; --redup:#7d6540;
-  --tulis:"Pinyon Script","Great Vibes","Brush Script MT",cursive;
-  --judul:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --coklat:#5a4034; --krem:#f9f0e0; --krem-kartu:#fdf7ea;
+  --emas:#b98c4a; --emas-tua:#84602a; --emas-muda:#dcc08f; --emas-terang:#ecd3a2;
+  --tinta:#4a3220; --redup:#6f5733;
+  --tulis:"Playfair Display",Georgia,"Times New Roman",serif;   /* nama dan judul */
+  --judul:"Lora",Georgia,"Times New Roman",serif;               /* isi teks */
   --arab:"Amiri","Traditional Arabic",serif;
-  --uk:clamp(108px,30vw,150px);
+  --kawung:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23ddc39b' stroke-opacity='.65' stroke-width='1'%3E%3Cellipse cx='18' cy='36' rx='18' ry='9.5'/%3E%3Cellipse cx='54' cy='36' rx='18' ry='9.5'/%3E%3Cellipse cx='36' cy='18' rx='9.5' ry='18'/%3E%3Cellipse cx='36' cy='54' rx='9.5' ry='18'/%3E%3Cpath d='M36 32.5L39.5 36L36 39.5L32.5 36Z' fill='%23d9b98a' fill-opacity='.8' stroke='none'/%3E%3C/svg%3E");   /* corak batik krem (kartu) */
+  --kawung-krem:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23d2b583' stroke-opacity='.85' stroke-width='1'%3E%3Cellipse cx='18' cy='36' rx='18' ry='9.5'/%3E%3Cellipse cx='54' cy='36' rx='18' ry='9.5'/%3E%3Cellipse cx='36' cy='18' rx='9.5' ry='18'/%3E%3Cellipse cx='36' cy='54' rx='9.5' ry='18'/%3E%3Cpath d='M36 32.5L39.5 36L36 39.5L32.5 36Z' fill='%23cfa66f' fill-opacity='.9' stroke='none'/%3E%3C/svg%3E");   /* corak batik latar krem (sama dengan cover) */
+  --kawung-terang:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72' fill='none' stroke='%23a98763' stroke-opacity='.75' stroke-width='1.1'%3E%3Cellipse cx='18' cy='36' rx='18' ry='9.5'/%3E%3Cellipse cx='54' cy='36' rx='18' ry='9.5'/%3E%3Cellipse cx='36' cy='18' rx='9.5' ry='18'/%3E%3Cellipse cx='36' cy='54' rx='9.5' ry='18'/%3E%3Cpath d='M36 32.5L39.5 36L36 39.5L32.5 36Z' fill='%23c9a57a' fill-opacity='1' stroke='none'/%3E%3C/svg%3E");   /* corak batik cokelat muda (sampul) */
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--krem);color:var(--tinta);font-family:var(--judul);font-size:19px;line-height:1.55;text-align:center;overflow-x:hidden}
+body{margin:0;background:var(--krem);color:var(--tinta);font-family:var(--judul);font-size:17px;line-height:1.65;text-align:center;overflow-x:hidden}
 body.terkunci{overflow:hidden}
 body.terkunci main{display:none}
 h1,h2,h3,p,figure,blockquote{margin:0}
 img{display:block;max-width:100%}
-
-/* Halaman dan bingkai */
-.halaman{position:relative;min-height:100vh;min-height:100svh;padding:118px 26px;display:flex;align-items:center;justify-content:center;background:var(--krem)}
-.halaman::before{content:"";position:absolute;inset:12px;border:1px solid var(--emas-muda);pointer-events:none}
-.isi{position:relative;z-index:1;width:100%;max-width:460px}
+a{color:var(--emas-tua)}
+[hidden]{display:none !important}
+.isi{position:relative;z-index:1;width:100%;max-width:560px;margin:0 auto}
 .isi>*+*{margin-top:14px}
 
-/* Ornamen batik di sudut */
-.hias{position:absolute;inset:0;pointer-events:none;background-repeat:no-repeat;background-size:var(--uk) auto}
-.hias.a{background-image:url(dekorasi/kiri-atas-A.webp),url(dekorasi/kanan-bawah-A.webp);background-position:left 12px top 12px,right 12px bottom 12px}
-.hias.b{background-image:url(dekorasi/kanan-atas-A.webp),url(dekorasi/kiri-bawah-A.webp);background-position:right 12px top 12px,left 12px bottom 12px}
-.hias.penuh{--uk:clamp(120px,36vw,180px);background-image:url(dekorasi/kiri-atas-A.webp),url(dekorasi/kanan-atas-A.webp),url(dekorasi/kiri-bawah-A.webp),url(dekorasi/kanan-bawah-A.webp);background-position:left 12px top 12px,right 12px top 12px,left 12px bottom 12px,right 12px bottom 12px}
-
-/* Sampul */
-.sampul{position:fixed;inset:0;z-index:10;overflow-y:auto;transition:transform .9s ease,opacity .9s ease,visibility 0s linear .9s}
+/* ===== Sampul: cokelat tua, corak batik cokelat muda ===== */
+.sampul{position:fixed;top:0;right:0;bottom:0;left:0;z-index:10;overflow-y:auto;display:flex;align-items:center;justify-content:center;padding:70px 26px;
+  background:radial-gradient(ellipse 72% 52% at 50% 50%,rgba(90,64,52,.8) 15%,rgba(90,64,52,0) 100%),var(--kawung-terang) center top/72px 72px,var(--coklat);
+  transition:transform .9s ease,opacity .9s ease,visibility 0s linear .9s}
 .sampul.terbuka{transform:translateY(-100%);opacity:0;visibility:hidden;pointer-events:none}
+.sampul .kecil{font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:var(--emas-terang)}
+.sampul .nama{font-family:var(--tulis);font-style:italic;font-weight:500;font-size:clamp(30px,9.5vw,52px);line-height:1.3;color:#fbf1de;white-space:nowrap;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.sampul .nama span{font-size:.8em;color:var(--emas-terang)}
+.sampul .dv{background:linear-gradient(var(--emas-terang),var(--emas-terang)) center/100% 1px no-repeat}
+.sampul .dv::after{background:var(--coklat);border-color:var(--emas-terang)}
+.sampul .tamu{margin-top:34px}
+.sampul .tamu p:first-child{font-size:16px;color:#e6d2b0}
+.sampul .nama-tamu{font-family:var(--tulis);font-style:italic;font-weight:500;font-size:26px;line-height:1.3;color:#fbf1de}
+.sampul .tombol{margin-top:30px;background:#f9f0e0;color:var(--coklat);border:2px solid var(--emas-terang);font-weight:600;box-shadow:0 0 0 3px rgba(90,64,52,.9),0 3px 14px rgba(0,0,0,.4)}
+.sampul .tombol:hover{background:#fff6e3}
 
-/* Tulisan */
-.kecil{font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:var(--emas-tua)}
-.kecil2{font-size:15px;color:var(--emas-tua);letter-spacing:.06em}
-.nama{font-family:var(--tulis);font-weight:400;font-size:clamp(38px,11.5vw,60px);line-height:1.25;color:var(--emas-tua);white-space:nowrap}
+/* ===== Hero: foto, memudar ke cokelat ===== */
+.hero{position:relative;min-height:100vh;min-height:max(100svh,150vw);padding:54px 24px 0;color:#fff;
+  background:linear-gradient(to bottom,rgba(0,0,0,.25) 0,rgba(0,0,0,.06) 36%,rgba(90,64,52,0) 52%,var(--coklat) 100%),url(foto/hero.jpg) center top/cover no-repeat var(--coklat)}
+.hero .isi{text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.label{font-size:15px;letter-spacing:.08em}
+.nama-hero{font-family:var(--tulis);font-style:italic;font-weight:500;font-size:clamp(30px,9.5vw,46px);line-height:1.3;white-space:nowrap}
+.dv-putih{position:relative;height:10px;width:min(200px,62%);margin-left:auto;margin-right:auto;background:linear-gradient(#fff,#fff) center/100% 2px no-repeat}
+.dv-putih::after{content:"";position:absolute;left:50%;top:0;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#fff}
+.tanggal{font-size:18px;letter-spacing:.03em}
+.hitung{display:flex;justify-content:center;gap:10px;margin-top:20px !important}
+.hitung div{width:66px;height:66px;border-radius:50%;border:2px solid #fff;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.hitung b{font-family:var(--tulis);font-size:23px;font-weight:500}
+.hitung span{margin-top:3px;font-size:11px}
+.tombol-putih{padding:8px 20px;border:0;border-radius:999px;background:#fff;color:var(--coklat);font:500 14px var(--judul);cursor:pointer;text-shadow:none}
+.tombol-putih:hover{background:#f9f0e0}
+.tombol-putih:focus-visible,.hero a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.tautan-kecil{margin-top:8px !important;font-size:13px}
+.hero a{color:#fff}
+
+/* ===== Bagian cokelat dan krem ===== */
+.coklat{background:var(--coklat);color:#f6ead6;padding:64px 14px}
+.krem{background-color:var(--krem);
+  background-image:radial-gradient(ellipse 72% 52% at 50% 50%,rgba(249,240,224,.9) 65%,rgba(249,240,224,0) 100%),var(--kawung-krem);
+  background-size:auto,72px 72px;padding:56px 14px}
+.melengkung{border-radius:0 0 50% 50% / 0 0 90px 90px;padding-bottom:130px;position:relative;z-index:2}
+
+.konten{padding:0 4px}
+.konten>*+*{margin-top:14px}
+/* Teks terang di atas latar cokelat tua */
+.coklat .judul,.coklat .arab,.coklat .arab2,.coklat h3,.coklat .nama,.coklat a,.coklat .ayat .no{color:var(--emas-terang)}
+.coklat .nama span{color:#f1dcb0}
+.coklat .terjemah{color:#f6ead6}
+.coklat .redup{color:#d8c3a0}
+.coklat .dv{background:linear-gradient(var(--emas-terang),var(--emas-terang)) center/100% 1px no-repeat}
+.coklat .dv::after{background:var(--coklat);border-color:var(--emas-terang)}
+.coklat .ayat,.coklat .kartu{border-color:rgba(236,211,162,.45);background:rgba(249,240,224,.07)}
+.coklat .tombol.garis{color:var(--emas-terang);border-color:var(--emas-terang)}
+.coklat .tombol.garis:hover{background:rgba(236,211,162,.16)}
+.coklat .tombol:focus-visible{outline-color:#fff}
+
+/* ===== Tulisan ===== */
+.judul{font-family:var(--tulis);font-weight:500;font-size:clamp(28px,8vw,34px);line-height:1.25;color:var(--emas-tua)}
+.judul-tebal{font-family:var(--tulis);font-weight:700;font-size:clamp(30px,9vw,38px);line-height:1.2;color:var(--coklat)}
+.nama{font-family:var(--tulis);font-style:italic;font-weight:500;font-size:clamp(28px,9vw,46px);line-height:1.3;color:var(--emas-tua)}
 .nama span{font-size:.8em;color:var(--emas)}
-.nama2{font-family:var(--tulis);font-weight:400;font-size:clamp(30px,9vw,40px);line-height:1.25;color:var(--emas-tua)}
-.dan{font-family:var(--tulis);font-size:34px;color:var(--emas);line-height:1}
-.judul{font-family:var(--tulis);font-weight:400;font-size:clamp(36px,10vw,46px);line-height:1.2;color:var(--emas-tua)}
-.tanggal{font-size:24px;font-weight:500;letter-spacing:.04em}
 .redup{color:var(--redup)}
 .arab{font-family:var(--arab);font-size:30px;line-height:1.9;color:var(--emas-tua)}
-.arab2{font-style:italic;color:var(--emas-tua)}
-h3{font-weight:600;font-size:24px;line-height:1.25;color:var(--emas-tua)}
-.ayat{padding:14px 10px}
-a{color:var(--emas-tua)}
-
-/* Pemisah */
+.arab2{font-style:italic;font-size:16px;color:var(--emas-tua)}
+h3{font-weight:600;font-size:20px;line-height:1.25;color:var(--emas-tua)}
 .dv{position:relative;height:10px;width:min(180px,60%);margin-left:auto;margin-right:auto;background:linear-gradient(var(--emas),var(--emas)) center/100% 1px no-repeat}
-.dv::after{content:"";position:absolute;left:50%;top:1px;width:8px;height:8px;margin-left:-4px;background:var(--krem);border:1px solid var(--emas);transform:rotate(45deg)}
+.dv::after{content:"";position:absolute;left:50%;top:1px;width:8px;height:8px;margin-left:-4px;background:var(--krem-kartu);border:1px solid var(--emas);transform:rotate(45deg)}
+.sampul .dv::after{background:var(--coklat)}
 
-/* Nama tamu */
-.tamu{padding-top:6px}
-.tamu p:first-child{font-size:16px;color:var(--redup)}
-.nama-tamu{font-family:var(--tulis);font-size:32px;line-height:1.3;color:var(--emas-tua)}
-
-/* Tombol */
+/* ===== Tombol ===== */
 .tombol{display:inline-block;padding:12px 28px;border:1px solid var(--emas);border-radius:999px;background:var(--emas-tua);color:var(--krem);font:500 18px var(--judul);text-decoration:none;cursor:pointer}
-.tombol:hover{background:#74511f}
-.tombol:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--emas);outline-offset:2px}
+.tombol:hover{background:#6e4f22}
+.tombol:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.pilih:focus-visible{outline:3px solid var(--emas);outline-offset:2px}
 .tombol.garis{background:transparent;color:var(--emas-tua)}
-.tombol.garis:hover{background:var(--krem2)}
-.tombol.kecil{padding:6px 18px;font-size:16px;letter-spacing:0;text-transform:none;margin-top:6px}
-.kecil2 a{font-size:16px}
+.tombol.garis:hover{background:#f3e6cd}
+.tombol.kecil{padding:6px 18px;font-size:14px;margin-top:6px;letter-spacing:.12em;text-transform:uppercase}
+.sampul .tombol:focus-visible{outline-color:#fff}
 
-/* Foto oval */
-.oval{width:min(210px,56vw);aspect-ratio:4/5;margin:10px auto;border-radius:50%;border:4px double var(--emas);overflow:hidden;background:var(--krem2);position:relative}
-.oval img{width:100%;height:100%;object-fit:cover}
-.oval.kosong img{display:none}
-.oval.kosong::after{content:"Foto menyusul";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--tulis);font-size:26px;color:var(--emas-tua)}
+/* ===== Ayat ===== */
+.ayat{padding:14px 12px;border:1px solid var(--emas-muda);border-radius:10px;background:rgba(255,255,255,.4)}
+.ayat .arab{font-size:26px;line-height:2.1}
+.ayat .no{white-space:nowrap;font-size:.72em;color:var(--emas)}
+.terjemah{margin-top:10px;font-size:15px;font-style:italic;line-height:1.65;color:var(--tinta)}
 
-/* Hitung mundur */
-.hitung{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0}
-.hitung div{padding:10px 2px;border:1px solid var(--emas);border-radius:8px;background:rgba(255,255,255,.35)}
-.hitung b{display:block;font-size:34px;font-weight:500;line-height:1.1;color:var(--emas-tua)}
-.hitung span{font-size:15px;color:var(--redup)}
+/* ===== Mempelai: foto di bingkai tebal, zoom, border bergerak ===== */
+@property --sudut{syntax:"<angle>";initial-value:0deg;inherits:false}
+.mempelai .judul-tebal{margin-bottom:26px}
+.baris-mempelai{display:flex;align-items:center;gap:18px;margin-top:0}
+.baris-mempelai+.baris-mempelai{margin-top:34px}
+.baris-mempelai.balik{flex-direction:row-reverse}
+.bingkai{--sudut:0deg;flex:0 0 44%;aspect-ratio:3/4;padding:8px;border:5px solid transparent;border-radius:26px;
+  background:linear-gradient(var(--krem),var(--krem)) padding-box,
+             conic-gradient(from var(--sudut),var(--coklat),#a98763 25%,var(--coklat) 50%,#7a5a44 75%,var(--coklat)) border-box;
+  animation:ring-berputar 8s linear infinite}
+@keyframes ring-berputar{to{--sudut:360deg}}
+.bingkai .foto{position:relative;width:100%;height:100%;overflow:hidden;border-radius:16px;background:var(--coklat)}
+.bingkai .foto img{width:100%;height:100%;object-fit:cover;animation:foto-zoom 14s ease-in-out infinite alternate}
+@keyframes foto-zoom{from{transform:scale(1)}to{transform:scale(1.14)}}
+.foto.kosong img{display:none}
+.foto.kosong::after{content:"foto";position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;font:600 18px var(--judul);color:#f9f0e0}
+.teks-mempelai{flex:1}
+.teks-mempelai>*+*{margin-top:4px}
+.teks-mempelai h3{font-family:var(--tulis);font-weight:700;font-size:20px;color:var(--coklat)}
+.balik .teks-mempelai{text-align:right}
+.teks-mempelai{text-align:left}
 
-/* Kartu */
-.kartu{padding:16px 18px;border:1px solid var(--emas-muda);border-radius:10px;background:rgba(255,255,255,.35)}
-.rek{font-size:26px;font-weight:600;letter-spacing:.06em;color:var(--tinta)}
+/* ===== Kartu di dalam kartu ===== */
+.kartu{padding:14px 16px;border:1px solid var(--emas-muda);border-radius:10px;background:rgba(255,255,255,.4)}
 
-/* Formulir */
+/* ===== Foto pembatas dan foto penutup ===== */
+.pita-foto,.penutup-foto{position:relative;margin:0;background:var(--coklat)}
+.pita-foto img{width:100%;height:auto;aspect-ratio:743/684;object-fit:cover;object-position:center 30%}
+.penutup-foto img{width:100%;height:auto;aspect-ratio:744/623;object-fit:cover;object-position:center 8%}
+.pita-foto::after,.penutup-foto::after{content:"";position:absolute;top:0;right:0;left:0;height:45%;pointer-events:none;background:linear-gradient(to bottom,var(--coklat),rgba(90,64,52,0))}
+
+/* ===== Tanda kasih: kartu berlatar foto ===== */
+.kartu-pola{padding:26px 18px}
+.kartu-pola>*+*{margin-top:14px}
+.pilihan{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.pilih{min-width:92px;padding:11px 16px;border:2px solid var(--emas-muda);border-radius:12px;background:rgba(255,255,255,.5);color:var(--emas-tua);font:600 16px var(--judul);cursor:pointer}
+.pilih[aria-pressed="true"]{border-color:var(--emas-tua);background:rgba(255,255,255,.85);box-shadow:inset 0 0 0 1px var(--emas-tua)}
+.rincian{margin-top:20px}
+.rincian>*+*{margin-top:8px}
+.judul-bank{font-size:22px;font-weight:500}
+.rincian .nomor{font-size:27px;font-weight:600;letter-spacing:.05em;overflow-wrap:anywhere}
+.rincian .alamat{font-size:19px;overflow-wrap:anywhere}
+
+/* ===== RSVP: kartu berborder tebal ===== */
+.kartu-bingkai{padding:26px 18px;border:3px solid var(--coklat);border-radius:30px}
+.kartu-bingkai>*+*{margin-top:14px}
 form{display:grid;gap:14px;text-align:left}
 label,legend{display:block;font-size:16px;color:var(--emas-tua)}
-input[type=text],select,textarea{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--emas);border-radius:8px;background:rgba(255,255,255,.6);color:var(--tinta);font:18px var(--judul)}
+input[type=text],select,textarea{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--emas);border-radius:8px;background:rgba(255,255,255,.7);color:var(--tinta);font:18px var(--judul)}
 fieldset{border:0;padding:0;margin:0;display:flex;gap:10px;flex-wrap:wrap}
 legend{width:100%;margin-bottom:4px}
 .pil input{position:absolute;opacity:0}
@@ -92,48 +162,43 @@ legend{width:100%;margin-bottom:4px}
 .pil input:focus-visible+span{outline:3px solid var(--emas);outline-offset:2px}
 form .tombol{justify-self:center}
 .pesan{text-align:center;min-height:1.4em;color:var(--redup);font-size:16px}
+.jebakan{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
-/* Animasi */
+/* ===== Ucapan tamu ===== */
+.ucapan{margin-top:26px;text-align:left}
+.ucapan h3{text-align:center;margin-bottom:10px}
+.ucapan ul{list-style:none;margin:0;padding:0;max-height:340px;overflow-y:auto;overscroll-behavior:contain;display:grid;gap:10px}
+.ucapan li{padding:12px 14px;border:1px solid var(--emas-muda);border-radius:10px;background:rgba(255,255,255,.55)}
+.ucapan li b{display:block;color:var(--emas-tua);font-weight:600}
+.ucapan li p{margin:4px 0 0;font-size:16px;line-height:1.55;overflow-wrap:anywhere}
+.ucapan li small{display:block;margin-top:6px;font-size:13px;color:var(--redup)}
+.ucapan li.kosong{text-align:center;color:var(--redup);border-style:dashed}
+
+/* ===== Tombol musik: kanan atas, tampil jelas di semua latar ===== */
+.musik{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:14px;z-index:30;width:46px;height:46px;padding:0;border-radius:50%;
+  border:2px solid #f9f0e0;background:var(--coklat);color:#f9f0e0;display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 0 0 2px var(--coklat),0 2px 10px rgba(0,0,0,.35)}
+.musik:disabled{opacity:.5;cursor:default}
+.musik:focus-visible{outline:3px solid var(--emas);outline-offset:4px}
+.musik .off{display:none}
+.musik[aria-pressed="true"] .on{display:none}
+.musik[aria-pressed="true"] .off{display:block}
+
+/* ===== Animasi muncul ===== */
 .kata{opacity:0;animation:kata .9s ease forwards;animation-delay:calc(var(--urut) * .3s)}
+main .kata{animation-delay:calc(.7s + var(--urut) * .3s)}
 @keyframes kata{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease}
 .js .reveal.tampak{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  .kata,.js .reveal{opacity:1;animation:none;transform:none;transition:none}
-  .sampul{transition:none}
+  /* Gerakan dihilangkan, tetapi efek pudar halus (fade) tetap ada */
+  .kata{animation-name:kata-pudar;animation-duration:.8s}
+  .js .reveal{transform:none;transition:opacity .8s ease}
+  .sampul{transition:opacity .8s ease,visibility 0s linear .8s}
+  .sampul.terbuka{transform:none}
+  .bingkai,.bingkai .foto img{animation:none}
 }
+@keyframes kata-pudar{from{opacity:0}to{opacity:1}}
 
-/* ===== FONT BARU: elegan dan mudah dibaca ===== */
-:root{
-  --tulis:"Playfair Display",Georgia,"Times New Roman",serif;   /* nama dan judul */
-  --judul:"Lora",Georgia,"Times New Roman",serif;               /* isi teks */
-}
-body{font-size:17px;line-height:1.65}
-.nama{font-style:italic;font-weight:500;font-size:clamp(28px,9vw,50px);line-height:1.3}
-.nama2{font-style:italic;font-weight:500;font-size:clamp(24px,7vw,32px);line-height:1.3}
-.nama-tamu{font-style:italic;font-weight:500;font-size:24px}
-.dan{font-style:italic;font-size:28px}
-.judul{font-weight:500;font-size:clamp(28px,8vw,36px);line-height:1.25}
-h3{font-size:20px}
-.tanggal{font-size:21px;font-weight:500}
-.arab2{font-size:16px}
-.oval.kosong::after{font-size:20px;font-style:italic}
-.hitung b{font-size:30px}
-
-/* ===== DEKORASI LATAR: corak kawung dan pinggiran tumpal ===== */
-:root{
-  --kawung:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64' fill='none' stroke='%23b98c4a' stroke-opacity='.22'%3E%3Cellipse cx='32' cy='16' rx='8' ry='16'/%3E%3Cellipse cx='32' cy='48' rx='8' ry='16'/%3E%3Cellipse cx='16' cy='32' rx='16' ry='8'/%3E%3Cellipse cx='48' cy='32' rx='16' ry='8'/%3E%3Ccircle cx='32' cy='32' r='2.5' fill='%23b98c4a' fill-opacity='.3' stroke='none'/%3E%3C/svg%3E");
-  --tumpal-atas:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16' viewBox='0 0 28 16'%3E%3Cpath d='M0 0H28L14 14Z' fill='%23b98c4a' fill-opacity='.4'/%3E%3Cpath d='M6 0H22L14 8Z' fill='%23f7ecd7'/%3E%3C/svg%3E");
-  --tumpal-bawah:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='16' viewBox='0 0 28 16'%3E%3Cpath d='M0 16H28L14 2Z' fill='%23b98c4a' fill-opacity='.4'/%3E%3Cpath d='M6 16H22L14 8Z' fill='%23f7ecd7'/%3E%3C/svg%3E");
-}
-.halaman{
-  background-color:var(--krem);
-  background-image:radial-gradient(ellipse 75% 52% at 50% 50%,var(--krem) 30%,rgba(247,236,215,0) 100%),var(--kawung);
-  background-size:auto,64px 64px;
-}
-.halaman::before{
-  background:var(--tumpal-atas) repeat-x left top/28px 16px,var(--tumpal-bawah) repeat-x left bottom/28px 16px;
-}
-
-/* Halaman pertama baru beranimasi setelah sampul selesai bergeser */
-main .kata{animation-delay:calc(.7s + var(--urut) * .3s)}
+/* ===== Corak batik memudar di belakang tulisan (agar mudah dibaca) ===== */
+.kartu-bingkai .pudar{--lebar-x:0px;--lebar-y:6px;--pemudaran:14px}
