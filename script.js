@@ -2,7 +2,7 @@ document.documentElement.classList.add("js");
 
 // ===== PENGATURAN: ganti sesuai data acara =====
 var WHATSAPP = "62XXXXXXXXXX";               // cadangan RSVP: nomor WhatsApp, format 62812xxxx (tanpa + atau 0)
-var URL_DATA = "";                            // tempel URL Web App Google Apps Script (lihat apps-script/Code.gs)
+var URL_DATA = "https://script.google.com/macros/s/AKfycbx9KdqB6bbSdvF9pjtfkteGZf979yQmJk9JgIY3tldGGOqi-12IbZzTHnSwtH1B2PED/exec";                            // tempel URL Web App Google Apps Script (lihat apps-script/Code.gs)
 var WAKTU_HITUNG = "2027-01-10T00:00:00+07:00";  // ganti ke jam akad kalau sudah ada
 var JEDA_MUSIK = 2000;                        // milidetik: jeda sebelum musik kembali setelah lantunan selesai
 var ACARA = {
