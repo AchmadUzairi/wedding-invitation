@@ -27,6 +27,7 @@ window.addEventListener("hashchange", tampilkanNamaTamu);
 // 2. Tombol Buka undangan
 document.getElementById("tombol-buka").addEventListener("click", function () {
   document.body.classList.remove("terkunci");
+  perbaruiGulir();
   document.querySelector(".sampul").classList.add("terbuka");
   window.scrollTo(0, 0);
 });
@@ -96,6 +97,19 @@ tombolSalin.addEventListener("click", function () {
 var formRsvp = document.getElementById("rsvp");
 var pesan = document.getElementById("pesan");
 var daftarUcapan = document.getElementById("daftar-ucapan");
+var judulUcapan = document.getElementById("judul-ucapan");
+var petunjukGulir = document.getElementById("petunjuk-gulir");
+function perbaruiJumlah() {
+  var n = daftarUcapan.querySelectorAll("li:not(.kosong)").length;
+  judulUcapan.textContent = n ? "Ucapan dari tamu (" + n + ")" : "Ucapan dari tamu";
+}
+function perbaruiGulir() {                               // petunjuk muncul hanya bila masih ada ucapan di bawah
+  var masihAda = daftarUcapan.scrollHeight - daftarUcapan.scrollTop - daftarUcapan.clientHeight > 8;
+  daftarUcapan.classList.toggle("bisa-gulir", masihAda);
+  petunjukGulir.hidden = !masihAda;
+}
+daftarUcapan.addEventListener("scroll", perbaruiGulir);
+window.addEventListener("resize", perbaruiGulir);
 
 function waktuLalu(ms) {
   var d = Math.max(0, Date.now() - ms) / 1000;
@@ -117,9 +131,11 @@ function tampilkanUcapan(daftar) {
   if (!daftar.length) {
     var kosong = document.createElement("li"); kosong.className = "kosong";
     kosong.textContent = "Belum ada ucapan. Jadilah yang pertama.";
-    daftarUcapan.appendChild(kosong); return;
+    daftarUcapan.appendChild(kosong);
+  } else {
+    daftar.forEach(function (item) { daftarUcapan.appendChild(buatUcapan(item)); });
   }
-  daftar.forEach(function (item) { daftarUcapan.appendChild(buatUcapan(item)); });
+  perbaruiJumlah(); perbaruiGulir();
 }
 function muatUcapan() {
   if (!URL_DATA) { document.getElementById("kotak-ucapan").hidden = true; return; }
@@ -163,6 +179,7 @@ formRsvp.addEventListener("submit", function (e) {
       if (ucapan) {
         if (daftarUcapan.firstChild && daftarUcapan.firstChild.className === "kosong") daftarUcapan.textContent = "";
         daftarUcapan.insertBefore(buatUcapan({ nama: nama, ucapan: ucapan, waktu: Date.now() }), daftarUcapan.firstChild);
+        perbaruiJumlah(); perbaruiGulir();
       }
       setTimeout(muatUcapan, 2500);
       setTimeout(function () { tombol.disabled = false; }, 4000);
