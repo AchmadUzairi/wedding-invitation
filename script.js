@@ -5,6 +5,8 @@ var WHATSAPP = "62XXXXXXXXXX";               // cadangan RSVP: nomor WhatsApp, f
 var URL_DATA = "https://script.google.com/macros/s/AKfycbx9KdqB6bbSdvF9pjtfkteGZf979yQmJk9JgIY3tldGGOqi-12IbZzTHnSwtH1B2PED/exec";                            // tempel URL Web App Google Apps Script (lihat apps-script/Code.gs)
 var WAKTU_HITUNG = "2027-01-10T00:00:00+07:00";  // ganti ke jam akad kalau sudah ada
 var JEDA_MUSIK = 2000;                        // milidetik: jeda sebelum musik kembali setelah lantunan selesai
+var KECEPATAN_GULIR = 22;                     // piksel per detik: kecepatan ucapan bergulir otomatis
+var JEDA_UJUNG = 2500;                        // milidetik: berhenti sejenak di ujung atas dan bawah daftar
 var ACARA = {
   judul: "Pernikahan Uzairi & Samantha",
   tanggal: "20270110",                        // YYYYMMDD
@@ -136,6 +138,7 @@ function tampilkanUcapan(daftar) {
     daftar.forEach(function (item) { daftarUcapan.appendChild(buatUcapan(item)); });
   }
   perbaruiJumlah(); perbaruiGulir();
+    if (typeof gulirOtomatis !== "undefined") gulirOtomatis.ulang();
 }
 function muatUcapan() {
   if (!URL_DATA) { document.getElementById("kotak-ucapan").hidden = true; return; }
@@ -180,12 +183,76 @@ formRsvp.addEventListener("submit", function (e) {
         if (daftarUcapan.firstChild && daftarUcapan.firstChild.className === "kosong") daftarUcapan.textContent = "";
         daftarUcapan.insertBefore(buatUcapan({ nama: nama, ucapan: ucapan, waktu: Date.now() }), daftarUcapan.firstChild);
         perbaruiJumlah(); perbaruiGulir();
+        daftarUcapan.scrollTop = 0; gulirOtomatis.ulang();
       }
       setTimeout(muatUcapan, 2500);
       setTimeout(function () { tombol.disabled = false; }, 4000);
     })
     .catch(function () { pesan.textContent = "Belum terkirim. Periksa sambungan internet lalu coba lagi."; tombol.disabled = false; });
 });
+// 6b. Ucapan bergulir otomatis pelan bila daftarnya penuh.
+// Berhenti saat disentuh atau disorot kursor, saat bagian ini tidak terlihat, dan bagi yang mematikan animasi di perangkatnya.
+var gulirOtomatis = (function () {
+  var ul = daftarUcapan;
+  var pos = 0, fase = "turun", batasWaktu = 0, dariPos = 0, awalKembali = 0, terakhir = 0;
+  var berjalan = false, terlihat = false, dijeda = false, disorot = false, idLanjut = null;
+  var DURASI_KEMBALI = 1200;
+  var kurangiGerak = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function batas() { return ul.scrollHeight - ul.clientHeight; }
+  function boleh() { return !kurangiGerak && terlihat && !dijeda && !document.hidden && batas() > 4; }
+  function mulai() {
+    if (berjalan || !boleh()) return;
+    berjalan = true; terakhir = performance.now(); requestAnimationFrame(langkah);
+  }
+  function langkah(t) {
+    if (!boleh()) { berjalan = false; return; }
+    var dt = Math.min(64, t - terakhir) / 1000; terakhir = t;
+    if (fase === "turun") {                                      // bergulir ke bawah dengan pelan
+      pos = Math.min(batas(), pos + KECEPATAN_GULIR * dt);
+      ul.scrollTop = pos;
+      if (pos >= batas() - 0.5) { fase = "tunggu-bawah"; batasWaktu = t + JEDA_UJUNG; }
+    } else if (fase === "tunggu-bawah") {
+      if (t >= batasWaktu) { fase = "kembali"; awalKembali = t; dariPos = ul.scrollTop; }
+    } else if (fase === "kembali") {                             // kembali ke atas, melambat di ujung
+      var k = Math.min(1, (t - awalKembali) / DURASI_KEMBALI);
+      var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      pos = dariPos * (1 - e); ul.scrollTop = pos;
+      if (k >= 1) { fase = "tunggu-atas"; batasWaktu = t + JEDA_UJUNG; }
+    } else if (fase === "tunggu-atas") {
+      if (t >= batasWaktu) fase = "turun";
+    }
+    requestAnimationFrame(langkah);
+  }
+  function jeda() { dijeda = true; clearTimeout(idLanjut); }
+  function lanjutNanti() {                                       // lanjut 3,5 detik setelah tamu berhenti menyentuh
+    clearTimeout(idLanjut);
+    idLanjut = setTimeout(function () {
+      if (disorot) return;
+      dijeda = false; pos = ul.scrollTop;
+      fase = pos >= batas() - 1 ? "tunggu-bawah" : "turun"; batasWaktu = performance.now() + JEDA_UJUNG;
+      mulai();
+    }, 3500);
+  }
+  ul.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { disorot = true; jeda(); } });
+  ul.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { disorot = false; lanjutNanti(); } });
+  ul.addEventListener("touchstart", jeda, { passive: true });
+  ul.addEventListener("touchend", lanjutNanti, { passive: true });
+  ul.addEventListener("touchcancel", lanjutNanti, { passive: true });
+  ul.addEventListener("wheel", function () { jeda(); lanjutNanti(); }, { passive: true });
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) mulai(); });
+  window.addEventListener("resize", mulai);
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (daftar) { terlihat = daftar[0].isIntersecting; if (terlihat) mulai(); }, { threshold: 0.25 }).observe(ul);
+  } else { terlihat = true; }
+
+  return {
+    mulai: mulai,
+    ulang: function () {                                         // daftar baru: mulai dari atas setelah jeda sejenak
+      pos = 0; ul.scrollTop = 0; fase = "tunggu-atas"; batasWaktu = performance.now() + JEDA_UJUNG; mulai();
+    }
+  };
+})();
 
 // 7. Animasi muncul saat digulir
 var targetReveal = document.querySelectorAll("main .isi > *:not(.kata)");
