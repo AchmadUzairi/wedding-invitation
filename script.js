@@ -33,6 +33,7 @@ document.getElementById("tombol-buka").addEventListener("click", function () {
   document.querySelector(".sampul").classList.add("terbuka");
   window.scrollTo(0, 0);
 });
+window.undanganSiap = true;   // tanda untuk cadangan di index.html: tombol buka sudah aktif
 
 // 3. Hitung mundur
 var targetWaktu = new Date(WAKTU_HITUNG).getTime();
